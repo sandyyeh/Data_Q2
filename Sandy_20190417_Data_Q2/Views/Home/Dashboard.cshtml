@@ -1,0 +1,72 @@
+﻿@model IEnumerable<Sandy_20190417_Data_Q2.Models.Model1>
+
+@{
+    ViewBag.Title = "Dashboard";
+}
+
+
+<h2>Dashboard</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Date)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Ticket)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ResponseMinutes)
+        </th>
+        <th></th>
+
+    </tr>
+
+    @if (Model != null)
+    {
+        foreach (var item in Model)
+        {
+            <tr>
+                <td>
+
+                    @Html.DisplayFor(modelItem => item.Date)
+                </td>
+                <td>
+
+                    @Html.DisplayFor(modelItem => item.Ticket)
+                </td>
+                <td>
+
+
+                    @Html.DisplayFor(modelItem => item.ResponseMinutes)
+                </td>
+            </tr>
+        }
+
+
+
+    }
+
+
+    <tr></tr>
+ @functions{
+     public static double Day (double day)
+     {return Math.Floor(day/24);}
+     public static double Hour(double hour)
+     { return Math.Round((hour/ 60), 2); ; }
+     }
+    
+    
+     
+    <tr>
+        <td></td>
+
+        <td>Ticket:@Model.Sum(Model => Model.Ticket)</td>
+        <td>AvgResponseMinutes:@Model.Average(Model => Model.ResponseMinutes) ( @Day(@Model.Average(Model => Model.ResponseMinutes)) Day       /  @Hour(@Model.Average(Model => Model.ResponseMinutes)) Hour /        @Model.Average(Model => Model.ResponseMinutes) Minutes)</td>
+
+    </tr>
+</table>
+
+
+
+
