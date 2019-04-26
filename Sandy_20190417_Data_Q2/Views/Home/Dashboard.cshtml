@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Sandy_20190417_Data_Q2.Models.Model1>
+﻿@model IEnumerable<Sandy_20190417_Data_Q2.Models.Data>
 
 @{
     ViewBag.Title = "Dashboard";
@@ -36,8 +36,6 @@
                     @Html.DisplayFor(modelItem => item.Ticket)
                 </td>
                 <td>
-
-
                     @Html.DisplayFor(modelItem => item.ResponseMinutes)
                 </td>
             </tr>
@@ -49,12 +47,7 @@
 
 
     <tr></tr>
- @functions{
-     public static double Day (double day)
-     {return Math.Floor(day/1440);}
-     public static double Hour(double hour)
-     { return Math.Round((hour/ 60), 2); ; }
-     }
+
     
     
      
@@ -62,7 +55,7 @@
         <td></td>
 
         <td>Ticket:@Model.Sum(Model => Model.Ticket)</td>
-        <td>AvgResponseMinutes:@Model.Average(Model => Model.ResponseMinutes) Minutes ( @Day(@Model.Average(Model => Model.ResponseMinutes)) Day       /  @Hour(@Model.Average(Model => Model.ResponseMinutes)) Hour )</td>
+        <td>AvgResponseMinutes:@Model.Average(Model => Model.ResponseMinutes) Minutes ( @ViewBag.Day Day       /  @ViewBag.Hour Hour )</td>
 
     </tr>
 </table>

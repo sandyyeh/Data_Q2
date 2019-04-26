@@ -9,10 +9,10 @@ namespace Sandy_20190417_Data_Q2.Models
    
     public class Rootobject
     {
-        public Model1[] Property1 { get; set; }
+        public Data[] Property1 { get; set; }
     }
 
-    public class Model1
+    public class Data
     {
         [DisplayFormat(DataFormatString = "{0:yyyy/MM/dd}")]
         public DateTime Date { get; set; }

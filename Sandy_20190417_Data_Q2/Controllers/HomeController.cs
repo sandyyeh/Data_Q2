@@ -16,39 +16,44 @@ namespace Sandy_20190417_Data_Q2.Controllers
         public ActionResult Index()
         {
 
-            
-
             return View();
         }
 
-        public ActionResult Dashboard()
+
+        //public static double Day(double day)
+        //{ return  }
+        public static double Hour(double hour)
+        { return Math.Round((hour / 60), 2); }
+
+        public ActionResult Dashboard(Data data)
         {
-            string json1 = System.IO.File.ReadAllText(Server.MapPath("~/App_Data/data1.json"));
-            string json2 = System.IO.File.ReadAllText(Server.MapPath("~/App_Data/data2.json"));
-            string json3 = System.IO.File.ReadAllText(Server.MapPath("~/App_Data/data3.json"));
-
-            List<Model1> _list1 = JsonConvert.DeserializeObject<List<Model1>>(json1);
-            List<Model1> _list2 = JsonConvert.DeserializeObject<List<Model1>>(json2);
-            List<Model1> _list3 = JsonConvert.DeserializeObject<List<Model1>>(json3);
-
+          
+            int total = 0;
+            double day, hour;
 
             Random num = new Random();//亂數種子
-            int i = num.Next(1, 4);//回傳1-3的亂數
+            int i = num.Next(0, 3);//回傳1-3的亂數
 
-            switch (i)
+            string[] file = { "~/App_Data/data1.json", "~/App_Data/data2.json", "~/App_Data/data3.json" };
+            string json = System.IO.File.ReadAllText(Server.MapPath(file[i]));
+            List<Data> _list = JsonConvert.DeserializeObject<List<Data>>(json);
+
+            for (int a = 0; a < _list.Count; a++)
             {
-                case 1:
-                   
-                    return View(_list1);
 
-                case 2:
-                    return View(_list2);
-
-                default:
-                    return View(_list3);
+                total += _list[a].ResponseMinutes;
 
             }
-          
+
+            day = Math.Floor((double)total / (1440*_list.Count));
+            hour = Math.Round(((double)total / (60*_list.Count)), 2);
+
+            ViewBag.Day = day;
+            ViewBag.Hour = hour;
+
+            return View(_list);
         }
+
+      
     }
 }
