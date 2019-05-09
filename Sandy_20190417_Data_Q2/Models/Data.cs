@@ -7,11 +7,6 @@ using System.Web;
 namespace Sandy_20190417_Data_Q2.Models
 {
    
-    public class Rootobject
-    {
-        public Data[] Property1 { get; set; }
-    }
-
     public class Data
     {
         [DisplayFormat(DataFormatString = "{0:yyyy/MM/dd}")]

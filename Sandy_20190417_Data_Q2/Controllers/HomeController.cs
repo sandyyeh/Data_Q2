@@ -15,45 +15,44 @@ namespace Sandy_20190417_Data_Q2.Controllers
     {
         public ActionResult Index()
         {
-
             return View();
         }
 
 
-        //public static double Day(double day)
-        //{ return  }
         public static double Hour(double hour)
-        { return Math.Round((hour / 60), 2); }
+        {
+            return Math.Round((hour / 60), 2);
+        }
 
         public ActionResult Dashboard(Data data)
         {
-          
+
             int total = 0;
             double day, hour;
 
-            Random num = new Random();//亂數種子
-            int i = num.Next(0, 3);//回傳1-3的亂數
+            Random random = new Random();//亂數種子
+            int num = random.Next(0, 3);//回傳1-3的亂數
 
             string[] file = { "~/App_Data/data1.json", "~/App_Data/data2.json", "~/App_Data/data3.json" };
-            string json = System.IO.File.ReadAllText(Server.MapPath(file[i]));
-            List<Data> _list = JsonConvert.DeserializeObject<List<Data>>(json);
+            string json = System.IO.File.ReadAllText(Server.MapPath(file[num]));
+            List<Data> list = JsonConvert.DeserializeObject<List<Data>>(json);
 
-            for (int a = 0; a < _list.Count; a++)
+            for (int i = 0; i < list.Count; i++)
             {
 
-                total += _list[a].ResponseMinutes;
+                total += list[i].ResponseMinutes;
 
             }
 
-            day = Math.Floor((double)total / (1440*_list.Count));
-            hour = Math.Round(((double)total / (60*_list.Count)), 2);
+            day = Math.Floor((double)total / (1440 * list.Count));
+            hour = Math.Round(((double)total / (60 * list.Count)), 2);
 
             ViewBag.Day = day;
             ViewBag.Hour = hour;
 
-            return View(_list);
+            return View(list);
         }
 
-      
+
     }
 }

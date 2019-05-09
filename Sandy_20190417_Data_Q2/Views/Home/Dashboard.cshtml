@@ -40,23 +40,12 @@
                 </td>
             </tr>
         }
-
-
-
     }
-
-
-    <tr></tr>
-
-    
-    
-     
+    <tr></tr>    
     <tr>
         <td></td>
-
         <td>Ticket:@Model.Sum(Model => Model.Ticket)</td>
-        <td>AvgResponseMinutes:@Model.Average(Model => Model.ResponseMinutes) Minutes ( @ViewBag.Day Day       /  @ViewBag.Hour Hour )</td>
-
+        <td>AvgResponseMinutes:@Model.Average(Model => Model.ResponseMinutes) Minutes ( @ViewBag.Day Day/@ViewBag.Hour Hour )</td>
     </tr>
 </table>
 
